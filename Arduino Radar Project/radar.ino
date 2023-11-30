@@ -1,7 +1,8 @@
 #include <Servo.h>
 const int trigPin = 3;
 const int echoPin = 4;
-const int led = 5;
+const int buzzer = 5;
+const int led = 6;
 
 Servo servoMotor;
 
@@ -44,10 +45,12 @@ int cal_distance(){
   
   if (distance < 20) {
   	digitalWrite(led, HIGH);
+  	digitalWrite(buzzer, HIGH);
     // Led On if the distance is withing 20 mm
   }
   else{
     digitalWrite(led, LOW);
+    digitalWrite(buzzer, LOW);
     //Led off if the distance is not within 20 mm
   }  
   return distance;
