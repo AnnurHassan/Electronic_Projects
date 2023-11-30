@@ -7,7 +7,7 @@ Check it out [here](https://easyeda.com/editor#id=|7617aa49451e4fcd877120587bd70
 
 ![image](https://github.com/AnnurHassan/Learning-Robotics/assets/39032781/5f3e0b88-c7d0-43f8-bc15-e67085ab7a4b)
 
-![image](https://github.com/AnnurHassan/Learning-Robotics/assets/39032781/a2e29efe-5e90-4563-83eb-e27c414beac9)
+![image](https://github.com/AnnurHassan/Learning-Robotics/assets/39032781/cda89ee4-89b6-4ff0-96d7-a1a4aa1568a8)
 
 # Circuit Simulation
 A Circuit Simulation has been done beforehand on a breadboard using [Tinker Cad](https://www.tinkercad.com/things/ii6DmvlBP4N-arduino-radar-with-servo)
