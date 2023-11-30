@@ -16,7 +16,7 @@ Even though the project has been built completely on breadboard, I have made a c
   
 - Lastly, Two operational LEDs connected to D4 and D5 respectively. You can set them up however you need.
 
-Check it out [here](https://easyeda.com/editor#id=|7617aa49451e4fcd877120587bd70e5b|61210422480b409aa4e4f2f1ace844e6)
+The schematic and PCB are built using EASYEDA. Check them out [here](https://easyeda.com/editor#id=|7617aa49451e4fcd877120587bd70e5b|61210422480b409aa4e4f2f1ace844e6)
 
 ![image](https://github.com/AnnurHassan/Learning-Robotics/assets/39032781/5f3e0b88-c7d0-43f8-bc15-e67085ab7a4b)
 
