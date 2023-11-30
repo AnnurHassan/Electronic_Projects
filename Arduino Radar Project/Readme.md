@@ -5,9 +5,9 @@ An Arduino-based radar system using positional Micro Servo and HC-SR04 Ultrasoni
 Even though the project has been built completely on breadboard, I have made a custom PCB for this. I am still learning the concept of PCB therefore kept it very simple. 
 Check it out [here](https://easyeda.com/editor#id=|7617aa49451e4fcd877120587bd70e5b|61210422480b409aa4e4f2f1ace844e6)
 
-![image](https://github.com/AnnurHassan/Electronics-Projects/assets/39032781/28acf154-1413-4258-a52b-017f29f30b55)
+![image](https://github.com/AnnurHassan/Learning-Robotics/assets/39032781/5f3e0b88-c7d0-43f8-bc15-e67085ab7a4b)
 
-![image](https://github.com/AnnurHassan/Electronics-Projects/assets/39032781/7cde5fe8-62a7-49b2-9bf4-435ddee82380)
+![image](https://github.com/AnnurHassan/Learning-Robotics/assets/39032781/a2e29efe-5e90-4563-83eb-e27c414beac9)
 
 # Circuit Simulation
 A Circuit Simulation has been done beforehand on a breadboard using [Tinker Cad](https://www.tinkercad.com/things/ii6DmvlBP4N-arduino-radar-with-servo)
