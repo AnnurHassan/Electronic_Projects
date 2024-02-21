@@ -13,6 +13,8 @@
 #define BIN1 7
 #define BIN2 8
 #define PWMB 9
+#define button1 10
+#define button2 12
 
 // tunable constants
 const double Kp = 1.0; // if increased: turns will be taken faster, oscilates. if lower: turn slowly and might miss
@@ -127,7 +129,7 @@ void runMotor(int left, int right) {
   }
 }
 
-void loop()
+void init()
 {
     current_time = millis();
     elapsed_time = current_time - previous_time;
@@ -164,4 +166,11 @@ void loop()
         previous_error = error;
         previous_time = current_time;
     }
+}
+
+void loop() {
+  int button_1 = digitalRead(button1);
+  int button_2 = digitalRead(button2);
+
+  if (button_1 == 1) init();
 }
