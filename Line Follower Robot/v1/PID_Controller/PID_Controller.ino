@@ -24,7 +24,7 @@ const double Kd = 0.05; // if increased: turns will be fast and smooth. if lower
 const double BASE_SPEED = 125;
 
 // time related const and vars
-const unsigned long dt = 100; //timestep in ms
+const unsigned long dt = 1000; //timestep in ms
 unsigned long previous_time = 0;
 unsigned long current_time;
 unsigned long elapsed_time;
@@ -37,10 +37,10 @@ double error;
 double proportional;
 double derivative;
 double integral = 0;
-unsigned int delta; 
+int delta; 
 
 // to store sensor readings
-unsigned int sensor_values[6];
+int sensor_values[6];
 
 void setup()
 {
@@ -80,7 +80,7 @@ int normalizeSensorReading(int sensorReading){
 int calculateError(int sensor_values[])
 {
     // assumes 6 sensors are used
-    unsigned int sensor_weights[] = {-2, -1, 0, 0, 1, 2};
+    int sensor_weights[] = {-2, -1, 0, 0, 1, 2};
     int sensor_reading = 0;
     int weighted_reading = 0;
     int weighted_sum = 0;
@@ -130,7 +130,9 @@ void runMotor(int left, int right) {
 }
 
 void start()
-{
+{ 
+  while (1){
+    
     current_time = millis();
     elapsed_time = current_time - previous_time;
 
@@ -143,6 +145,21 @@ void start()
         sensor_values[3] = analogRead(Sensor_4);
         sensor_values[4] = analogRead(Sensor_5);
         sensor_values[5] = analogRead(Sensor_6);
+
+        // Serial.print("Readings: ");
+        // Serial.print(sensor_values[0]);
+        // Serial.print(" ");
+        // Serial.print(sensor_values[1]);
+        // Serial.print(" ");
+        // Serial.print(sensor_values[2]);
+        // Serial.print(" ");
+        // Serial.print(sensor_values[3]);
+        // Serial.print(" ");
+        // Serial.print(sensor_values[4]);
+        // Serial.print(" ");
+        // Serial.print(sensor_values[5]);
+        // Serial.println(" ");
+
 
         // Calculate error
         error = calculateError(sensor_values);
@@ -160,12 +177,18 @@ void start()
         delta = proportional + Ki * integral + derivative;
 
         // Run motor as expected
-        runMotor(BASE_SPEED - delta, BASE_SPEED + delta);
 
+        // runMotor(BASE_SPEED - delta, BASE_SPEED + delta);
+        Serial.print("Speed: ");
+        Serial.print(BASE_SPEED - delta);
+        Serial.print(" ");
+        Serial.print(BASE_SPEED + delta);
+        Serial.println(" ");
         // Update variables for next iteration
         previous_error = error;
         previous_time = current_time;
     }
+  }
 }
 
 void loop() {
