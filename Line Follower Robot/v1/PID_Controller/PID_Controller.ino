@@ -84,16 +84,24 @@ int calculateError(int sensor_values[])
     int sensor_reading = 0;
     int weighted_reading = 0;
     int weighted_sum = 0;
+    int count = 0; // counts number of sensor that detects black
 
     for (int i = 0; i < 6; i++)
     {
         sensor_reading = normalizeSensorReading(sensor_values[i]);
+        if (sensor_reading == 32){
+          count += 1;
+        }
 
         weighted_reading = sensor_reading * sensor_weights[i];
         weighted_sum = weighted_sum + weighted_reading;
     }
 
-    return weighted_sum;
+    if (count == 1){
+      return weighted_sum * 2;
+    } else {
+      return weighted_sum;
+    }
 }
 
 void runMotor(int left, int right) {
