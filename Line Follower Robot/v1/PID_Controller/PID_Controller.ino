@@ -129,7 +129,7 @@ void runMotor(int left, int right) {
   }
 }
 
-void init()
+void start()
 {
     current_time = millis();
     elapsed_time = current_time - previous_time;
@@ -172,5 +172,5 @@ void loop() {
   int button_1 = digitalRead(button1);
   int button_2 = digitalRead(button2);
 
-  if (button_1 == 1) init();
+  if (button_1 == 1) start();
 }
