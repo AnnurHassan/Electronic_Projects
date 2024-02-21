@@ -17,7 +17,7 @@
 #define button2 12
 
 // tunable constants
-const double Kp = 1.0; // if increased: turns will be taken faster, oscilates. if lower: turn slowly and might miss
+const double Kp = 0.9; // if increased: turns will be taken faster, oscilates. if lower: turn slowly and might miss
 const double Ki = 0.0; // no idea how to tune lol
 const double Kd = 0.05; // if increased: turns will be fast and smooth. if lower: it get jerky
 
@@ -186,12 +186,12 @@ void start()
 
         // Run motor as expected
 
-        // runMotor(BASE_SPEED - delta, BASE_SPEED + delta);
-        Serial.print("Speed: ");
-        Serial.print(BASE_SPEED - delta);
-        Serial.print(" ");
-        Serial.print(BASE_SPEED + delta);
-        Serial.println(" ");
+        runMotor(BASE_SPEED - delta, BASE_SPEED + delta);
+        // Serial.print("Speed: ");
+        // Serial.print(BASE_SPEED - delta);
+        // Serial.print(" ");
+        // Serial.print(BASE_SPEED + delta);
+        // Serial.println(" ");
         // Update variables for next iteration
         previous_error = error;
         previous_time = current_time;
