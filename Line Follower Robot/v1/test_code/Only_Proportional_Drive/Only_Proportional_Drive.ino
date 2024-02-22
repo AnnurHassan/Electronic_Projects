@@ -16,8 +16,8 @@
 #define button1 10
 #define button2 12
 
-const double Kp = 0.28;
-int BASE_SPEED = 140;
+const double Kp = 1.0;
+int BASE_SPEED = 120;
 
 double error;
 double proportional;
@@ -125,29 +125,10 @@ void start(){
     sensor_values[4] = normalizeSensorReading(analogRead(Sensor_5));
     sensor_values[5] = normalizeSensorReading(analogRead(Sensor_6));
 
-    // Serial.print("Readings: ");
-    // Serial.print(sensor_values[0]);
-    // Serial.print(" ");
-    // Serial.print(sensor_values[1]);
-    // Serial.print(" ");
-    // Serial.print(sensor_values[2]);
-    // Serial.print(" ");
-    // Serial.print(sensor_values[3]);
-    // Serial.print(" ");
-    // Serial.print(sensor_values[4]);
-    // Serial.print(" ");
-    // Serial.print(sensor_values[5]);
-    // Serial.println(" ");
-
     error = calculateError(sensor_values);
     proportional = Kp * error;
-    // Serial.print("Spped: ");
-    // Serial.print(" ");
-    // Serial.print(BASE_SPEED - proportional);
-    // Serial.print(" ");
-    // Serial.print(BASE_SPEED + proportional);
-    // Serial.println(" ");
     runMotor(BASE_SPEED - proportional, BASE_SPEED + proportional);
+    
   }
 }
 
