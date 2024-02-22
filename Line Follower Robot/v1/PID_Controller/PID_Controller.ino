@@ -17,11 +17,11 @@
 #define button2 12
 
 // tunable constants
-const double Kp = 0.9; // if increased: turns will be taken faster, oscilates. if lower: turn slowly and might miss
+const double Kp = 10.0; // if increased: turns will be taken faster, oscilates. if lower: turn slowly and might miss
 const double Ki = 0.0; // no idea how to tune lol
-const double Kd = 0.05; // if increased: turns will be fast and smooth. if lower: it get jerky
+const double Kd = 0.00; // if increased: turns will be fast and smooth. if lower: it get jerky
 
-const double BASE_SPEED = 125;
+int BASE_SPEED = 10;
 
 // time related const and vars
 const unsigned long dt = 1000; //timestep in ms
@@ -139,64 +139,70 @@ void runMotor(int left, int right) {
 
 void start()
 { 
-  while (1){
+  runMotor(10,255);
+  // while (1){
     
-    current_time = millis();
-    elapsed_time = current_time - previous_time;
+  //   current_time = millis();
+  //   elapsed_time = current_time - previous_time;
 
-    if (elapsed_time >= dt)
-    {
-        // read the sensor value here and store inside sensor_values
-        sensor_values[0] = analogRead(Sensor_1);
-        sensor_values[1] = analogRead(Sensor_2);
-        sensor_values[2] = analogRead(Sensor_3);
-        sensor_values[3] = analogRead(Sensor_4);
-        sensor_values[4] = analogRead(Sensor_5);
-        sensor_values[5] = analogRead(Sensor_6);
+  //   if (elapsed_time >= dt)
+  //   {
+  //       // read the sensor value here and store inside sensor_values
+  //       sensor_values[0] = normalizeSensorReading(analogRead(Sensor_1));
+  //       sensor_values[1] = normalizeSensorReading(analogRead(Sensor_2));
+  //       sensor_values[2] = normalizeSensorReading(analogRead(Sensor_3));
+  //       sensor_values[3] = normalizeSensorReading(analogRead(Sensor_4));
+  //       sensor_values[4] = normalizeSensorReading(analogRead(Sensor_5));
+  //       sensor_values[5] = normalizeSensorReading(analogRead(Sensor_6));
 
-        // Serial.print("Readings: ");
-        // Serial.print(sensor_values[0]);
-        // Serial.print(" ");
-        // Serial.print(sensor_values[1]);
-        // Serial.print(" ");
-        // Serial.print(sensor_values[2]);
-        // Serial.print(" ");
-        // Serial.print(sensor_values[3]);
-        // Serial.print(" ");
-        // Serial.print(sensor_values[4]);
-        // Serial.print(" ");
-        // Serial.print(sensor_values[5]);
-        // Serial.println(" ");
+  //       // Serial.print("Readings: ");
+  //       // Serial.print(sensor_values[0]);
+  //       // Serial.print(" ");
+  //       // Serial.print(sensor_values[1]);
+  //       // Serial.print(" ");
+  //       // Serial.print(sensor_values[2]);
+  //       // Serial.print(" ");
+  //       // Serial.print(sensor_values[3]);
+  //       // Serial.print(" ");
+  //       // Serial.print(sensor_values[4]);
+  //       // Serial.print(" ");
+  //       // Serial.print(sensor_values[5]);
+  //       // Serial.println(" ");
 
 
-        // Calculate error
-        error = calculateError(sensor_values);
+  //       // Calculate error
+  //       error = calculateError(sensor_values);
 
-        // Proportional term
-        proportional = Kp * error;
+  //       // Proportional term
+  //       proportional = Kp * error;
 
-        // Integral term using trapezoidal rule
-        integral = integral + 0.5 * (error + previous_error) * (elapsed_time / 1000.0);
+  //       // Integral term using trapezoidal rule
+  //       integral = integral + 0.5 * (error + previous_error) * (elapsed_time / 1000.0);
 
-        // Derivative term
-        derivative = Kd * (error - previous_error) / (elapsed_time / 1000.0);
+  //       // Derivative term
+  //       derivative = Kd * (error - previous_error) / (elapsed_time / 1000.0);
 
-        // PID output
-        delta = proportional + Ki * integral + derivative;
+  //       // PID output
+  //       delta = proportional 
 
-        // Run motor as expected
+  //       // Run motor as expected
 
-        runMotor(BASE_SPEED - delta, BASE_SPEED + delta);
-        // Serial.print("Speed: ");
-        // Serial.print(BASE_SPEED - delta);
-        // Serial.print(" ");
-        // Serial.print(BASE_SPEED + delta);
-        // Serial.println(" ");
-        // Update variables for next iteration
-        previous_error = error;
-        previous_time = current_time;
-    }
-  }
+  //       if (sensor_values[0] + sensor_values[1] + sensor_values[2] + sensor_values[3] + sensor_values[4] + sensor_values[5] == 0){
+  //         runMotor(BASE_SPEED - 60, BASE_SPEED - 60);
+  //       } else {
+  //         runMotor(BASE_SPEED - delta, BASE_SPEED + delta);
+  //       }
+        
+  //       // Serial.print("Speed: ");
+  //       // Serial.print(BASE_SPEED - delta);
+  //       // Serial.print(" ");
+  //       // Serial.print(BASE_SPEED + delta);
+  //       // Serial.println(" ");
+  //       // Update variables for next iteration
+  //       previous_error = error;
+  //       previous_time = current_time;
+  //   }
+  // }
 }
 
 void loop() {
