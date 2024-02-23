@@ -16,11 +16,18 @@
 #define button1 10
 #define button2 12
 
-const double Kp = 1.0;
-int BASE_SPEED = 120;
+// tunable constants
+const double Kp = 1.5; // if increased: turns will be taken faster, oscilates. if lower: turn slowly and might miss
+const double Kd = 0.5; // if increased: turns will be fast and smooth. if lower: it get jerky
+
+int BASE_SPEED = 200;
 
 double error;
+double previous_error;
+
 double proportional;
+double derivative;
+double delta;
 
 // to store sensor readings
 int sensor_values[6];
@@ -127,7 +134,18 @@ void start(){
 
     error = calculateError(sensor_values);
     proportional = Kp * error;
-    runMotor(BASE_SPEED - proportional, BASE_SPEED + proportional);
+    derivative = Kd * (error - previous_error);
+    delta = proportional + derivative;
+
+
+    if (delta > 0){
+      runMotor(BASE_SPEED - 2*delta, BASE_SPEED);
+    } else {
+      runMotor(BASE_SPEED, BASE_SPEED + delta);
+    }
+
+    previous_error = error;
+    //runMotor(BASE_SPEED - proportional, BASE_SPEED + proportional);
     
   }
 }

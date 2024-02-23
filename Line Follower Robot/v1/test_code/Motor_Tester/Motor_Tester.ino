@@ -55,7 +55,7 @@ void runMotor(int left, int right) {
 }
 
 void start() {
-  runMotor(120,120);
+  runMotor(200,100);
 }
 
 void loop() {
