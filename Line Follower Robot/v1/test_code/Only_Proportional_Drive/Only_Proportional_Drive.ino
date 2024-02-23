@@ -17,10 +17,10 @@
 #define button2 12
 
 // tunable constants
-const double Kp = 1.5; // if increased: turns will be taken faster, oscilates. if lower: turn slowly and might miss
+const double Kp = 1.35; // if increased: turns will be taken faster, oscilates. if lower: turn slowly and might miss
 const double Kd = 0.5; // if increased: turns will be fast and smooth. if lower: it get jerky
 
-int BASE_SPEED = 200;
+int BASE_SPEED = 210;
 
 double error;
 double previous_error;
@@ -100,6 +100,12 @@ int normalizeSensorReading(int sensorReading){
 
 int calculateError(int sensor_values[])
 {
+    // setting bias for right
+    if (sensor_values[0] + sensor_values[1] + sensor_values[2] + sensor_values[3] + sensor_values[4] + sensor_values[5] == 600){
+      sensor_values[4] = 0;
+      sensor_values[5] = 0;
+    }
+
     // assumes 6 sensors are used
     int sensor_weights[] = {-2, -1, 0, 0, 1, 2};
     int sensor_reading = 0;
@@ -141,7 +147,7 @@ void start(){
     if (delta > 0){
       runMotor(BASE_SPEED - 2*delta, BASE_SPEED);
     } else {
-      runMotor(BASE_SPEED, BASE_SPEED + delta);
+      runMotor(BASE_SPEED, BASE_SPEED + 2*delta);
     }
 
     previous_error = error;

@@ -6,7 +6,17 @@
 #define Sensor_5 A5
 #define Sensor_6 A6
 
-int threshold;
+#define PWMA 3
+#define AIN1 5
+#define AIN2 4
+#define STBY 6
+#define BIN1 7
+#define BIN2 8
+#define PWMB 9
+#define button1 10
+#define button2 12
+
+int threshold[6];
 int minValues[6];
 int maxValues[6];
 
@@ -18,6 +28,14 @@ void setup(){
     pinMode(Sensor_4, INPUT);
     pinMode(Sensor_5, INPUT);
     pinMode(Sensor_6, INPUT);
+
+    pinMode(PWMA, OUTPUT);
+    pinMode(AIN1, OUTPUT);
+    pinMode(AIN2, OUTPUT);
+    pinMode(BIN1, OUTPUT);
+    pinMode(BIN2, OUTPUT);
+    pinMode(PWMB, OUTPUT);
+    digitalWrite(STBY, HIGH);
   }
 
 void runMotor(int left, int right)
@@ -61,21 +79,30 @@ void runMotor(int left, int right)
 }
 
 void readSensors(){
-  while(1){
-    Serial.print("Readings: ");
-    Serial.print(analogRead(Sensor_1));
-    Serial.print(" ");
-    Serial.print(analogRead(Sensor_2));
-    Serial.print(" ");
-    Serial.print(analogRead(Sensor_3));
-    Serial.print(" ");
-    Serial.print(analogRead(Sensor_4));
-    Serial.print(" ");
-    Serial.print(analogRead(Sensor_5));
-    Serial.print(" ");
-    Serial.print(analogRead(Sensor_6));
-    Serial.println(" ");
-  }
+  Serial.println(203);
+  // for ( int i = 1; i < 6; i++)
+  //   {
+  //     // threshold[i] = (minValues[i] + maxValues[i]) / 2;
+  //     Serial.print("1234");
+  //     Serial.print("   ");
+  //   }
+
+  // while(1){
+  //   Serial.print("Readings: ");
+  //   Serial.print(analogRead(Sensor_1));
+  //   Serial.print(" ");
+  //   Serial.print(analogRead(Sensor_2));
+  //   Serial.print(" ");
+  //   Serial.print(analogRead(Sensor_3));
+  //   Serial.print(" ");
+  //   Serial.print(analogRead(Sensor_4));
+  //   Serial.print(" ");
+  //   Serial.print(analogRead(Sensor_5));
+  //   Serial.print(" ");
+  //   Serial.print(analogRead(Sensor_6));
+  //   Serial.println(" ");
+  //   delay(1000);
+  // }
 }
 
 void calibrate(){
@@ -85,7 +112,7 @@ void calibrate(){
     maxValues[i] = analogRead(i);
   }
   
-  for (int i = 0; i < 3000; i++)
+  for (int i = 0; i < 1000; i++)
   {
     runMotor(50, -50);
 
@@ -107,12 +134,15 @@ void calibrate(){
       Serial.print(threshold[i]);
       Serial.print("   ");
     }
+    runMotor(0,0);
   }
+}
 
-void loop(){
+void loop() {
     int button_1 = digitalRead(button1);
     int button_2 = digitalRead(button2);
 
-    if (button_1 == 1) start();
+    if (button_1 == 1) readSensors();
+    if (button_2 == 1) calibrate();
 }
 
